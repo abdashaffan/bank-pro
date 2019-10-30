@@ -82,7 +82,7 @@ export default function TransactionTable() {
 					<TableBody>
 						{rows.map(row => (
 							<StyledTableRow key={row.id}>
-								<StyledTableCell component="th" scope="row">
+								<StyledTableCell component="th" scope="row" align="center">
 									{row.id}
 								</StyledTableCell>
 								<StyledTableCell align="center">{row.time}</StyledTableCell>

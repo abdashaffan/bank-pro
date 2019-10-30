@@ -25,13 +25,13 @@ const useStyles = makeStyles(theme => ({
 		alignItems: "center",
 		backgroundColor: "#fafafa",
 		borderRadius: "6px",
-		padding: "2em 3em",
+		padding: "4em 3em",
 		border: "1px solid rgba(32,33,36,0.28)",
 		boxShadow: "0 4px 4px 0 rgba(32,33,36,0.28)"
 	},
 	avatar: {
 		margin: theme.spacing(1),
-		backgroundColor: theme.palette.secondary.main
+		backgroundColor: "#3f51b5"
 	},
 	form: {
 		width: "100%", // Fix IE 11 issue.
@@ -53,39 +53,36 @@ export default function Login() {
 	const classes = useStyles();
 
 	return (
-		<Container component="main" maxWidth="xs">
-			<h1 className={classes.title}>Bank Pro</h1>
-			<div className={classes.paper}>
-				<Avatar className={classes.avatar}>
-					<LockOutlinedIcon />
-				</Avatar>
-				<Typography component="h1" variant="h5">
+		<div className={classes.paper}>
+			<Avatar className={classes.avatar}>
+				<LockOutlinedIcon />
+			</Avatar>
+			<Typography component="h1" variant="h5">
+				Login
+			</Typography>
+			<form className={classes.form} noValidate>
+				<TextField
+					variant="outlined"
+					margin="normal"
+					required
+					fullWidth
+					id="account-number"
+					label="Nomor Rekening"
+					name="account-number"
+					autoComplete="account-number"
+					autoFocus
+					placeholder="Misal 123456789"
+				/>
+				<Button
+					type="submit"
+					fullWidth
+					variant="contained"
+					color="primary"
+					className={classes.submit}
+				>
 					Login
-				</Typography>
-				<form className={classes.form} noValidate>
-					<TextField
-						variant="outlined"
-						margin="normal"
-						required
-						fullWidth
-						id="account-number"
-						label="Nomor Rekening"
-						name="account-number"
-						autoComplete="account-number"
-						autoFocus
-						placeholder="Misal 123456789"
-					/>
-					<Button
-						type="submit"
-						fullWidth
-						variant="contained"
-						color="primary"
-						className={classes.submit}
-					>
-						Login
-					</Button>
-				</form>
-			</div>
-		</Container>
+				</Button>
+			</form>
+		</div>
 	);
 }
