@@ -1,12 +1,29 @@
-import React from "react";
-import Login from "../components/login";
-import TransactionTable from "../components/transaction";
+import React, { useState } from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+// Custom component
+import LoginPage from "./LoginPage";
+import TransferPage from "./TransferPage";
+
+function ShowedPage({ page }) {
+	switch (true) {
+		case page === "login":
+			return <LoginPage />;
+		case page === "history":
+			return ""; //TODO : Isi sama komponen history
+		case page === "transfer":
+			return <TransferPage />;
+		default:
+			return <LoginPage />;
+	}
+}
 
 export default function App() {
+	const [pageState, setPageState] = useState("transfer"); //login , history, atau transfer
+
 	return (
-		<div className="App">
-			{/* <Login /> */}
-			<TransactionTable />
-		</div>
+		<>
+			<CssBaseline />
+			<ShowedPage page={pageState} />
+		</>
 	);
 }
