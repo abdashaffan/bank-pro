@@ -9,14 +9,16 @@ import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 
 const useStyles = makeStyles({
 	root: {
-		marginTop: "15px",
+		position: "fixed",
+		top: "0",
+		left: "50%",
+		transform: "translateX(-50%)",
+		marginTop: "30px",
 		textAlign: "center",
-		// flexGrow: 1,
 		maxWidth: 500,
 		backgroundColor: "transparent",
 		border: "none",
-		boxShadow: "none",
-		margin: "auto"
+		boxShadow: "none"
 	},
 	tabRoot: {
 		fontFamily: "'Lato', sans-serif",
@@ -30,7 +32,6 @@ const useStyles = makeStyles({
 export default function IconLabelTabs({ handleClick }) {
 	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
-	// console.log(handleClick);
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
