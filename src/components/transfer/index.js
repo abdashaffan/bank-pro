@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
 		alignItems: "center",
 		backgroundColor: "#fafafa",
 		borderRadius: "6px",
-		padding: "4em 3em",
+		padding: "2em 2em",
 		border: "1px solid rgba(32,33,36,0.28)",
 		boxShadow: theme.shadows[12]
 	},

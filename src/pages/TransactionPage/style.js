@@ -12,7 +12,7 @@ const applyCustomStyles = makeStyles(theme => ({
 		marginTop: theme.spacing(5)
 	},
 	card: {
-		marginTop: "-200px",
+		// marginTop: "-200px",
 		marginBottom: theme.spacing(5)
 	}
 }));
