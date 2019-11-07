@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Login from "../../components/login";
 import applyCustomStyles from "./style";
 
-export default function LoginPage() {
+export default function LoginPage({ handleLogin }) {
 	const classes = applyCustomStyles();
 	return (
 		<Grid
@@ -21,7 +21,7 @@ export default function LoginPage() {
 				</Typography>
 			</Grid>
 			<Grid item xl={6} className={classes.card}>
-				<Login />
+				<Login handleLogin={handleLogin} />
 			</Grid>
 		</Grid>
 	);

@@ -55,7 +55,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-export default function Login() {
+export default function Login({ handleLogin }) {
 	const classes = useStyles(loginColorTheme);
 	return (
 		<ThemeProvider theme={loginColorTheme}>
@@ -78,7 +78,7 @@ export default function Login() {
 							name="account-number"
 							autoComplete="account-number"
 							autoFocus
-							placeholder="Misal 123456789"
+							placeholder="Masukkin apa aja"
 						/>
 						<Button
 							type="submit"
@@ -86,6 +86,7 @@ export default function Login() {
 							variant="contained"
 							color="primary"
 							className={classes.submit}
+							onClick={handleLogin}
 						>
 							Login
 						</Button>

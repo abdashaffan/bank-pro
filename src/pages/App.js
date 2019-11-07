@@ -16,10 +16,10 @@ const applyCustomStyles = makeStyles(theme => ({
 	}
 }));
 
-function ShowedPage({ page }) {
+function ShowedPage({ page, handleLogin }) {
 	switch (true) {
 		case page === 1:
-			return <LoginPage />;
+			return <LoginPage handleLogin={handleLogin} />;
 		case page === 2:
 			return <TransactionPage />;
 		case page === 3:
@@ -30,10 +30,14 @@ function ShowedPage({ page }) {
 }
 
 export default function App() {
-	const [pageState, setPageState] = useState(2); //1:login , 2:transaction 3:transfer
+	const [pageState, setPageState] = useState(1); //1:login , 2:transaction 3:transfer
 	const classes = applyCustomStyles();
+
 	function handleClick(buttonId) {
 		setPageState(buttonId);
+	}
+	function handleLogin() {
+		setPageState(2);
 	}
 
 	return (
@@ -54,7 +58,7 @@ export default function App() {
 					<></>
 				)}
 				<Grid item xs={12}>
-					<ShowedPage page={pageState} />
+					<ShowedPage page={pageState} handleLogin={handleLogin} />
 				</Grid>
 			</Grid>
 		</>
