@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import PhoneIcon from "@material-ui/icons/Phone";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import PersonPinIcon from "@material-ui/icons/PersonPin";
+import ForwardRoundedIcon from "@material-ui/icons/Forward";
+import FormatListBulletedRoundedIcon from "@material-ui/icons/FormatListBulletedRounded";
+import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 
 const useStyles = makeStyles({
 	root: {
-		flexGrow: 1,
-		maxWidth: 500
+		position: "fixed",
+		top: "0",
+		left: "50%",
+		transform: "translateX(-50%)",
+		marginTop: "30px",
+		textAlign: "center",
+		maxWidth: 500,
+		backgroundColor: "transparent",
+		border: "none",
+		boxShadow: "none"
+	},
+	tabRoot: {
+		fontFamily: "'Lato', sans-serif",
+		textTransform: "capitalize",
+		fontWeight: "bold",
+		color: "#fff",
+		borderColor: "#fff"
 	}
 });
 
-export default function IconLabelTabs() {
+export default function IconLabelTabs({ handleClick }) {
 	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
 
@@ -28,13 +43,29 @@ export default function IconLabelTabs() {
 				value={value}
 				onChange={handleChange}
 				variant="fullWidth"
-				indicatorColor="secondary"
-				textColor="secondary"
-				aria-label="icon label tabs example"
+				aria-label="navigation"
 			>
-				<Tab icon={<PhoneIcon />} label="RECENTS" />
-				<Tab icon={<FavoriteIcon />} label="FAVORITES" />
-				<Tab icon={<PersonPinIcon />} label="NEARBY" />
+				<Tab
+					icon={<FormatListBulletedRoundedIcon />}
+					label="History"
+					className={classes.tabRoot}
+					disableRipple
+					onClick={() => handleClick(2)}
+				/>
+				<Tab
+					icon={<CreditCardRoundedIcon />}
+					label="Transfer"
+					className={classes.tabRoot}
+					disableRipple
+					onClick={() => handleClick(3)}
+				/>
+				<Tab
+					icon={<ForwardRoundedIcon />}
+					label="Logout"
+					className={classes.tabRoot}
+					disableRipple
+					onClick={() => handleClick(1)}
+				/>
 			</Tabs>
 		</Paper>
 	);
