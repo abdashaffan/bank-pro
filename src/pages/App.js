@@ -44,37 +44,31 @@ export default function App() {
 		setPageState(2);
 	}
 
+	function isHomePage() {
+		return pageState !== 1;
+	}
+
 	return (
 		<>
 			<CssBaseline />
-			{pageState !== 1 ? (
-				<Grid
-					container
-					direction="column"
-					justify="flex-start"
-					alignItems="center"
-					className={classes.rootHome}
-				>
+			<Grid
+				container
+				direction={isHomePage() ? "column" : "row"}
+				justify={isHomePage() ? "flex-start" : "center"}
+				alignItems="center"
+				className={isHomePage() ? classes.rootHome : classes.rootLogin}
+			>
+				{isHomePage() ? (
 					<Grid item xs={12}>
 						<IconLabelTabs handleClick={handleClick} />
 					</Grid>
-					<Grid item xs={12}>
-						<ShowedPage page={pageState} handleLogin={handleLogin} />
-					</Grid>
+				) : (
+					<></>
+				)}
+				<Grid item xs={12}>
+					<ShowedPage page={pageState} handleLogin={handleLogin} />
 				</Grid>
-			) : (
-				<Grid
-					container
-					direction="row"
-					justify="center"
-					alignItems="center"
-					className={classes.rootLogin}
-				>
-					<Grid item xs={12}>
-						<ShowedPage page={pageState} handleLogin={handleLogin} />
-					</Grid>
-				</Grid>
-			)}
+			</Grid>
 		</>
 	);
 }
