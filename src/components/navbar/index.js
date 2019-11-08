@@ -9,10 +9,6 @@ import CreditCardRoundedIcon from "@material-ui/icons/CreditCardRounded";
 
 const useStyles = makeStyles({
 	root: {
-		position: "fixed",
-		top: "0",
-		left: "50%",
-		transform: "translateX(-50%)",
 		marginTop: "30px",
 		textAlign: "center",
 		maxWidth: 500,

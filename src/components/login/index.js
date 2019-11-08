@@ -74,7 +74,7 @@ export default function Login({ handleLogin }) {
 							required
 							fullWidth
 							id="account-number"
-							label="Nomor Rekening"
+							label="Account Number"
 							name="account-number"
 							autoComplete="account-number"
 							autoFocus

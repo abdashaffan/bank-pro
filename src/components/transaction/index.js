@@ -65,10 +65,10 @@ export default function TransactionTable() {
 					<TableHead>
 						<TableRow>
 							<StyledTableCell align="center">No</StyledTableCell>
-							<StyledTableCell align="center">Waktu</StyledTableCell>
-							<StyledTableCell align="center">Jenis Transaksi</StyledTableCell>
-							<StyledTableCell align="center">Besar Transaksi</StyledTableCell>
-							<StyledTableCell align="center">Rekening</StyledTableCell>
+							<StyledTableCell align="center">Time</StyledTableCell>
+							<StyledTableCell align="center">Type</StyledTableCell>
+							<StyledTableCell align="center">Amount</StyledTableCell>
+							<StyledTableCell align="center">Acc. Number</StyledTableCell>
 						</TableRow>
 					</TableHead>
 					<TableBody>

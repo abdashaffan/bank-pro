@@ -10,9 +10,13 @@ import TransferPage from "./TransferPage";
 import TransactionPage from "./TransactionPage";
 
 const applyCustomStyles = makeStyles(theme => ({
-	root: {
+	rootHome: {
 		backgroundColor: "#4caf50",
-		height: "100vh"
+		minHeight: "100vh"
+	},
+	rootLogin: {
+		backgroundColor: "#0288d1",
+		minHeight: "100vh"
 	}
 }));
 
@@ -43,24 +47,34 @@ export default function App() {
 	return (
 		<>
 			<CssBaseline />
-			<Grid
-				container
-				direction="row"
-				justify="space-around"
-				alignItems="center"
-				className={classes.root}
-			>
-				{pageState !== 1 ? (
+			{pageState !== 1 ? (
+				<Grid
+					container
+					direction="column"
+					justify="flex-start"
+					alignItems="center"
+					className={classes.rootHome}
+				>
 					<Grid item xs={12}>
 						<IconLabelTabs handleClick={handleClick} />
 					</Grid>
-				) : (
-					<></>
-				)}
-				<Grid item xs={12}>
-					<ShowedPage page={pageState} handleLogin={handleLogin} />
+					<Grid item xs={12}>
+						<ShowedPage page={pageState} handleLogin={handleLogin} />
+					</Grid>
 				</Grid>
-			</Grid>
+			) : (
+				<Grid
+					container
+					direction="row"
+					justify="center"
+					alignItems="center"
+					className={classes.rootLogin}
+				>
+					<Grid item xs={12}>
+						<ShowedPage page={pageState} handleLogin={handleLogin} />
+					</Grid>
+				</Grid>
+			)}
 		</>
 	);
 }
