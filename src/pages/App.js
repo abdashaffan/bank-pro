@@ -29,7 +29,7 @@ function ShowedPage({ page, handleLogin }) {
 		case page === 3:
 			return <TransferPage />;
 		default:
-			return <LoginPage />;
+			return <LoginPage handleLogin={handleLogin} />;
 	}
 }
 
