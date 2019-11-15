@@ -1,10 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const applyCustomStyles = makeStyles(theme => ({
-	root: {
-		backgroundColor: "#0288d1",
-		height: "100vh"
-	},
 	heading: {
 		color: "#fff",
 		fontWeight: "bold",

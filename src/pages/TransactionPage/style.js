@@ -5,10 +5,9 @@ const applyCustomStyles = makeStyles(theme => ({
 		color: "#fff",
 		fontWeight: "bold",
 		fontFamily: "'Lato', sans-serif",
-		marginTop: theme.spacing(0)
+		marginTop: theme.spacing(5)
 	},
 	card: {
-		// marginTop: "-200px",
 		marginBottom: theme.spacing(5)
 	}
 }));

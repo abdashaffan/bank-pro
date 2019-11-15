@@ -10,9 +10,13 @@ import TransferPage from "./TransferPage";
 import TransactionPage from "./TransactionPage";
 
 const applyCustomStyles = makeStyles(theme => ({
-	root: {
+	rootHome: {
 		backgroundColor: "#4caf50",
-		height: "100vh"
+		minHeight: "100vh"
+	},
+	rootLogin: {
+		backgroundColor: "#0288d1",
+		minHeight: "100vh"
 	}
 }));
 
@@ -25,7 +29,7 @@ function ShowedPage({ page, handleLogin }) {
 		case page === 3:
 			return <TransferPage />;
 		default:
-			return <LoginPage />;
+			return <LoginPage handleLogin={handleLogin} />;
 	}
 }
 
@@ -40,17 +44,21 @@ export default function App() {
 		setPageState(2);
 	}
 
+	function isHomePage() {
+		return pageState !== 1;
+	}
+
 	return (
 		<>
 			<CssBaseline />
 			<Grid
 				container
-				direction="row"
-				justify="space-around"
+				direction={isHomePage() ? "column" : "row"}
+				justify={isHomePage() ? "flex-start" : "center"}
 				alignItems="center"
-				className={classes.root}
+				className={isHomePage() ? classes.rootHome : classes.rootLogin}
 			>
-				{pageState !== 1 ? (
+				{isHomePage() ? (
 					<Grid item xs={12}>
 						<IconLabelTabs handleClick={handleClick} />
 					</Grid>
