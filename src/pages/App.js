@@ -1,9 +1,15 @@
+// React dependencies
 import React, { useState } from "react";
+
+// Module for consuming SOAP webservice
+import { checkLoginCredentials } from "../utils/jaxws";
+
+// React MUI component for styling
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 
-// Custom component
+// Custom component for styling
 import IconLabelTabs from "../components/navbar";
 import LoginPage from "./LoginPage";
 import TransferPage from "./TransferPage";
@@ -21,34 +27,64 @@ const applyCustomStyles = makeStyles(theme => ({
   }
 }));
 
-function ShowedPage({ page, handleLogin }) {
+const LOGIN = 1;
+const TRANSACTION = 2;
+const TRANSFER = 3;
+const HOME = 4;
+
+function ShowedPage({ page, handleLogin, isLoading, isValidLogin }) {
   switch (true) {
-    case page === 1:
-      return <LoginPage handleLogin={handleLogin} />;
-    case page === 2:
+    case page === LOGIN:
+      return (
+        <LoginPage
+          handleLogin={handleLogin}
+          isLoading={isLoading}
+          isValidLogin={isValidLogin}
+        />
+      );
+    case page === TRANSACTION:
       return <TransactionPage />;
-    case page === 3:
+    case page === TRANSFER:
       return <TransferPage />;
-    case page === 4:
+    case page === HOME:
       return <HomePage />;
     default:
-      return <LoginPage handleLogin={handleLogin} />;
+      return (
+        <LoginPage
+          handleLogin={handleLogin}
+          isLoading={isLoading}
+          isValidLogin={isValidLogin}
+        />
+      );
   }
 }
 
 export default function App() {
-  const [pageState, setPageState] = useState(1); //1:login , 2:transaction 3:transfer, 4:homepage
+  const [page, setPage] = useState(LOGIN); //LOGIN, TRANSACTION, TRANSFER, or HOME
+  const [isLoading, setIsLoading] = useState(false); // if true show loader component
+  const [isValidLogin, setIsValidLogin] = useState(true);
   const classes = applyCustomStyles();
 
   function handleClick(buttonId) {
-    setPageState(buttonId);
+    if (buttonId === HOME) {
+      setIsValidLogin(true);
+    }
+    setPage(buttonId);
   }
-  function handleLogin() {
-    setPageState(4);
+  async function handleLogin(accNum) {
+    setIsLoading(true);
+    const loginStatus = await checkLoginCredentials(accNum);
+    if (loginStatus === true) {
+      setIsValidLogin(true);
+      setPage(HOME);
+    } else {
+      setIsValidLogin(false);
+    }
+    setIsLoading(false);
   }
 
   function isHomePage() {
-    return pageState !== 1;
+    return page !== LOGIN;
   }
 
   return (
@@ -69,7 +105,12 @@ export default function App() {
           <></>
         )}
         <Grid item xs={12}>
-          <ShowedPage page={pageState} handleLogin={handleLogin} />
+          <ShowedPage
+            page={page}
+            handleLogin={handleLogin}
+            isLoading={isLoading}
+            isValidLogin={isValidLogin}
+          />
         </Grid>
       </Grid>
     </>
