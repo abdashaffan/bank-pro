@@ -72,10 +72,10 @@ export default function App() {
     setPage(buttonId);
   }
   async function handleLogin(accNum) {
+    setIsValidLogin(true);
     setIsLoading(true);
     const loginStatus = await checkLoginCredentials(accNum);
     if (loginStatus === true) {
-      setIsValidLogin(true);
       setPage(HOME);
     } else {
       setIsValidLogin(false);
