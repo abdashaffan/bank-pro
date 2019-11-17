@@ -5,24 +5,28 @@ import Grid from "@material-ui/core/Grid";
 import Login from "../../components/login";
 import applyCustomStyles from "./style";
 
-export default function LoginPage({ handleLogin }) {
-	const classes = applyCustomStyles();
-	return (
-		<Grid
-			container
-			direction="row"
-			justify="space-around"
-			alignItems="center"
-			className={classes.root}
-		>
-			<Grid item xl={6}>
-				<Typography variant="h3" gutterBottom className={classes.heading}>
-					Welcome to BankPro.
-				</Typography>
-			</Grid>
-			<Grid item xl={6} className={classes.card}>
-				<Login handleLogin={handleLogin} />
-			</Grid>
-		</Grid>
-	);
+export default function LoginPage({ handleLogin, isLoading, isValidLogin }) {
+  const classes = applyCustomStyles();
+  return (
+    <Grid
+      container
+      direction="row"
+      justify="space-around"
+      alignItems="center"
+      className={classes.root}
+    >
+      <Grid item xl={6}>
+        <Typography variant="h3" gutterBottom className={classes.heading}>
+          Welcome to BankPro.
+        </Typography>
+      </Grid>
+      <Grid item xl={6} className={classes.card}>
+        <Login
+          handleLogin={handleLogin}
+          isLoading={isLoading}
+          isValidLogin={isValidLogin}
+        />
+      </Grid>
+    </Grid>
+  );
 }

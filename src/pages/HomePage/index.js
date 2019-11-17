@@ -4,9 +4,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import Avatar from "@material-ui/core/Avatar";
-import ImageIcon from "@material-ui/icons/Image";
-import WorkIcon from "@material-ui/icons/Work";
-import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
@@ -39,7 +36,7 @@ export default function FolderList() {
                 <AccountCircleIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Pemilik Akun" secondary="Abda Shaffan" />
+            <ListItemText primary="Name" secondary="Abda Shaffan" />
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -47,7 +44,7 @@ export default function FolderList() {
                 <AccountBalanceWalletRoundedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="No. Rekening" secondary="10003" />
+            <ListItemText primary="Account Number" secondary="10003" />
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -55,7 +52,7 @@ export default function FolderList() {
                 <LocalAtmRoundedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Saldo" secondary="100000" />
+            <ListItemText primary="Balance" secondary="100000" />
           </ListItem>
         </List>
       </Grid>
