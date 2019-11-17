@@ -63,8 +63,8 @@ export default function Login({ handleLogin, isLoading, isValidLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setAbleToError(true);
     handleLogin(loginInput);
+    setAbleToError(true);
   }
 
   function handleChange(e) {
@@ -99,6 +99,7 @@ export default function Login({ handleLogin, isLoading, isValidLogin }) {
               autoComplete="off"
               autoFocus
               onChange={e => handleChange(e)}
+              onClick={() => setAbleToError(false)}
               placeholder="10001 atau 10002"
               helperText={isError() ? "Invalid account number" : ""}
             />
