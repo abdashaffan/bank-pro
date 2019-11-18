@@ -1,6 +1,6 @@
 import Axios from "axios";
 //URI Gak perlu pake http://localhost:8080 soalnya udah di set di src/setupProxy biar gak kena CORS error
-const wsdlURI = "/bankpro";
+const wsdlURI = "/services/bankpro";
 
 export async function checkLoginCredentials(accNum) {
   // TODO: ganti hardcoded url (localhost) pas udah di deploy
@@ -26,6 +26,6 @@ export async function checkLoginCredentials(accNum) {
     const isLoginValid = xmlDoc.getElementsByTagName("return")[0].innerHTML;
     return isLoginValid === "true";
   } catch (e) {
-    console.log(e);
+    console.log(e.stack);
   }
 }
