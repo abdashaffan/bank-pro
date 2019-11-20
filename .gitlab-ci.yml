@@ -4,9 +4,22 @@ before_script:
   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
   - npm install
 
+cache:
+  paths:
+    - node_modules/
+
 stages:
+  - install
   - test
   - deploy
+
+install_dependencies:
+  stage: install
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
 
 lint:
   stage: test
