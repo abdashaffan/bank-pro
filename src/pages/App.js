@@ -16,7 +16,7 @@ import TransferPage from "./TransferPage";
 import TransactionPage from "./TransactionPage";
 import HomePage from "./HomePage";
 
-const applyCustomStyles = makeStyles(theme => ({
+const applyCustomStyles = makeStyles(() => ({
   rootHome: {
     backgroundColor: "#4caf50",
     minHeight: "100vh"
