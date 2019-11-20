@@ -13,7 +13,7 @@ import LocalAtmRoundedIcon from "@material-ui/icons/LocalAtmRounded";
 // Custom styles
 import applyCustomStyles from "./style";
 
-export default function FolderList() {
+export default function HomePage() {
   const classes = applyCustomStyles();
 
   return (
