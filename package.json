@@ -13,7 +13,7 @@
     "typeface-roboto": "0.0.75"
   },
   "scripts": {
-    "pretest": "eslint  .",
+    "lint": "eslint  .",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
