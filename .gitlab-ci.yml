@@ -19,7 +19,7 @@ install_dependencies:
 lint_check:
   stage: test
   script:
-    - npm run pretest
+    - npm run lint
 
 testing_testing:
   stage: test
