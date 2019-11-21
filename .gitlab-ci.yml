@@ -1,46 +1,26 @@
 image: node:latest
 
-before_script:
-  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
-  - npm install
+stages:
+  - build
+  - test
 
 cache:
   paths:
     - node_modules/
 
-stages:
-  - install
-  - test
-  - deploy
-
 install_dependencies:
-  stage: install
+  stage: build
   script:
     - npm install
   artifacts:
     paths:
       - node_modules/
 
-lint:
+lint_check:
   stage: test
   script:
-    - npm run lint
+    - npm run pretest
 
-test:
+testing_testing:
   stage: test
-  script:
-    - npm run test
-
-deploy:dev:
-  only:
-    - dev
-  stage: deploy
-  script:
-    - bash deploy/deploy_dev.sh
-
-deploy:master:
-  only:
-    - master
-  stage: deploy
-  script:
-    - bash deploy/deploy_master.sh
+  script: npm test
