@@ -1,26 +1,60 @@
-image: node:latest
-
 stages:
-  - build
+  - clone
+  - install_dependencies
   - test
+  - deploy
 
 cache:
   paths:
     - node_modules/
 
-install_dependencies:
-  stage: build
+clone_repo:
+  stage: clone
   script:
-    - npm install
-  artifacts:
+    - echo pwd
+    - git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
+
+install_dependencies:
+  stage: install_dependencies
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
     paths:
       - node_modules/
+  script:
+    - echo pwd
+    - npm ci
+  only:
+    changes:
+      - package-lock.json
 
 lint_check:
   stage: test
   script:
     - npm run lint
+  except:
+    - dev
+    - master
 
-testing_testing:
+react_test:
   stage: test
-  script: npm test
+  script:
+    - npm run test
+  except:
+    - dev
+    - master
+
+build_prod:
+  stage: deploy
+  script:
+    - npm run build
+  after_script:
+    - serve -s build
+  only:
+    - master
+
+build_dev:
+  stage: deploy
+  script:
+    - npm start
+  only:
+    - dev
