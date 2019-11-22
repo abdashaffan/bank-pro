@@ -49,6 +49,6 @@ build_prod:
     - npm run build
   after_script:
     - serve -s build
-  only:
-    - dev
-    - master
+  # only:
+  #   - dev
+  #   - master
