@@ -28,8 +28,8 @@ pm2 status
 cd /home/ubuntu/bank-pro
 
 #install npm packages
-echo "Running npm ci"
-npm ci
+echo "Running npm install"
+npm install
 
 #Restart the node server
 npm start
