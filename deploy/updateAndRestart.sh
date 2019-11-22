@@ -10,7 +10,7 @@ rm -rf /home/ubuntu/bank-pro/
 pwd
 git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
 
-#source the nvm file. In an non
+#source the nvm file. In an non.
 #If you are not using nvm, add the actual path like
 # PATH=/home/ubuntu/node/bin:$PATH
 source /home/ubuntu/.nvm/nvm.sh
