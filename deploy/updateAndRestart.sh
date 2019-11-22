@@ -7,9 +7,10 @@ set -e
 rm -rf /home/ubuntu/bank-pro/
 
 # clone the repo again
+pwd
 git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
 
-#source the nvm file. In an non
+#source the nvm file. In an non.
 #If you are not using nvm, add the actual path like
 # PATH=/home/ubuntu/node/bin:$PATH
 source /home/ubuntu/.nvm/nvm.sh
@@ -26,10 +27,11 @@ npm install pm2 -g
 pm2 status
 
 cd /home/ubuntu/bank-pro
+git checkout dev
 
 #install npm packages
-echo "Running npm install"
-npm install
+echo "Running Build"
+npm run build
 
 #Restart the node server
-npm start
+# npm start

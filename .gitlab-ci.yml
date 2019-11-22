@@ -1,29 +1,65 @@
-image: node:8.9.0
-
-before_script:
-  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )"
-  - npm install
-
 stages:
+  - clean_apache_root
+  - clone
+  - install_dependencies
   - test
   - deploy
 
-# lint and test are two different jobs in the same stage.
-# This allows us to run these two in parallel and making build faster
+cache:
+  paths:
+    - node_modules/
 
-lint:
+remove_last_repo:
+  stage: clean_apache_root
+  script: sudo rm /var/www/html/bankpro -r
+  allow_failure: true
+  only:
+    - dev
+    - master
+
+clone_repo:
+  stage: clone
+  script:
+    - pwd
+    - git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
+
+install_dependencies:
+  stage: install_dependencies
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths:
+      - node_modules/
+  script:
+    - pwd
+    - npm ci
+  only:
+    changes:
+      - package-lock.json
+
+lint_check:
   stage: test
   script:
     - npm run lint
+  except:
+    - dev
+    - master
 
-test:
+react_test:
   stage: test
   script:
     - npm run test
+  except:
+    - dev
+    - master
 
-deploy:dev:
+build_prod:
   stage: deploy
   script:
-    - bash deploy/deploy.sh
+    - npm run build
+  after_script:
+    - pwd
+    - sudo mv build bankpro
+    - sudo cp -r bankpro /var/www/html
   only:
     - dev
+    - master
