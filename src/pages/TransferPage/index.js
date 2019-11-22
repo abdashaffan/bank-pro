@@ -6,7 +6,7 @@ import Transfer from "../../components/transfer";
 
 import applyCustomStyles from "./style";
 
-export default function TransferPage() {
+export default function TransferPage({currAccNum}) {
 	const classes = applyCustomStyles();
 	return (
 		<>
@@ -21,7 +21,9 @@ export default function TransferPage() {
 				</Typography>
 			</Grid>
 			<Grid item xs={12} className={classes.card}>
-				<Transfer />
+				<Transfer 
+				currAccNum={currAccNum}
+				/>
 			</Grid>
 		</>
 	);
