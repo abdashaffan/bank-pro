@@ -45,8 +45,6 @@ react_test:
 
 build_prod:
   stage: deploy
-  before_script:
-    - sudo npm install -g serve
   script:
     - npm run build
   after_script:
