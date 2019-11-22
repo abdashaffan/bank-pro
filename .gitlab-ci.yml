@@ -48,7 +48,9 @@ build_prod:
   script:
     - npm run build
   after_script:
-    - serve -s build
+    - pwd
+    - sudo mv build bankpro
+    - sudo cp -r bankpro /var/www/html
   # only:
   #   - dev
   #   - master
