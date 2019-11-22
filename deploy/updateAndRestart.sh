@@ -22,7 +22,7 @@ npm remove pm2 -g
 
 #pm2 needs to be installed globally as we would be deleting the repo folder.
 # this needs to be done only once as a setup script.
-npm ci pm2 -g
+npm install pm2 -g
 # starting pm2 daemon
 pm2 status
 
@@ -30,7 +30,7 @@ cd /home/ubuntu/bank-pro
 git checkout dev
 
 #install npm packages
-echo "Running npm ci"
+echo "Running Build"
 npm run build
 
 #Restart the node server
