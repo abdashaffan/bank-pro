@@ -7,6 +7,7 @@ set -e
 rm -rf /home/ubuntu/bank-pro/
 
 # clone the repo again
+pwd
 git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
 
 #source the nvm file. In an non
