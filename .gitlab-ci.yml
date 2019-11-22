@@ -57,6 +57,6 @@ build_prod:
     - pwd
     - sudo mv build bankpro
     - sudo cp -r bankpro /var/www/html
-  # only:
-  #   - dev
-  #   - master
+  only:
+    - dev
+    - master
