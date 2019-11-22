@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import Transaction from "../../components/transaction";
 import applyCustomStyles from "./style";
 
-export default function TransactionPage() {
+export default function TransactionPage({currAccNum}) {
 	const classes = applyCustomStyles();
 	return (
 		<>
@@ -20,7 +20,9 @@ export default function TransactionPage() {
 				</Typography>
 			</Grid>
 			<Grid item xs={12} className={classes.card}>
-				<Transaction />
+				<Transaction 
+				currAccNum={currAccNum}
+				/>
 			</Grid>
 		</>
 	);

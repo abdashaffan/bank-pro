@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 // Module for consuming SOAP webservice
 import { checkLoginCredentials } from "../utils/jaxws";
+// import { getUserTransaction } from "../../utils/jaxws";
 
 // React MUI component for styling
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -32,7 +33,7 @@ const TRANSACTION = 2;
 const TRANSFER = 3;
 const HOME = 4;
 
-function ShowedPage({ page, handleLogin, isLoading, isValidLogin }) {
+function ShowedPage({ page, handleLogin, isLoading, isValidLogin, currAccNum }) {
   switch (true) {
     case page === LOGIN:
       return (
@@ -43,9 +44,13 @@ function ShowedPage({ page, handleLogin, isLoading, isValidLogin }) {
         />
       );
     case page === TRANSACTION:
-      return <TransactionPage />;
+      return <TransactionPage 
+      currAccNum={currAccNum}
+      />;
     case page === TRANSFER:
-      return <TransferPage />;
+      return <TransferPage 
+        currAccNum={currAccNum}
+      />;
     case page === HOME:
       return <HomePage />;
     default:
@@ -63,6 +68,7 @@ export default function App() {
   const [page, setPage] = useState(LOGIN); //LOGIN, TRANSACTION, TRANSFER, or HOME
   const [isLoading, setIsLoading] = useState(false); // if true show loader component
   const [isValidLogin, setIsValidLogin] = useState(true);
+  const [currAccNum, setCurrAccNum] = useState(0);
   const classes = applyCustomStyles();
 
   function handleClick(buttonId) {
@@ -76,6 +82,7 @@ export default function App() {
     setIsLoading(true);
     const loginStatus = await checkLoginCredentials(accNum);
     if (loginStatus === true) {
+      setCurrAccNum(accNum);
       setPage(HOME);
     } else {
       setIsValidLogin(false);
@@ -86,6 +93,7 @@ export default function App() {
   function isHomePage() {
     return page !== LOGIN;
   }
+
 
   return (
     <>
@@ -110,6 +118,7 @@ export default function App() {
             handleLogin={handleLogin}
             isLoading={isLoading}
             isValidLogin={isValidLogin}
+            currAccNum={currAccNum}
           />
         </Grid>
       </Grid>
