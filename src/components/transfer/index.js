@@ -1,4 +1,5 @@
 import React from "react";
+import { doTransfer } from "../../utils/jaxws";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -46,6 +47,20 @@ export default function Transfer({currAccNum}) {
 	const [toAccount,setToAccount] = React.useState();
 	const [nominal, setNominal] = React.useState();
 
+	function handleToAccNumInput(e){
+		setToAccount(e.target.value);
+	}
+
+	function handleNominalInput(e){
+		setNominal(e.target.value);
+	}
+
+	function handleSubmit(e){
+		e.preventDefault();
+		const transferResult = doTransfer(currAccNum,toAccount,nominal);
+		console.log(transferResult);
+	}
+
 	return (
 		<Container component="main" maxWidth="xs">
 			<ThemeProvider theme={theme}>
@@ -56,7 +71,7 @@ export default function Transfer({currAccNum}) {
 					<Typography component="h1" variant="h5">
 						Transfer
 					</Typography>
-					<form className={classes.form} noValidate>
+					<form className={classes.form} noValidate onSubmit={e=>handleSubmit(e)}>
 						<TextField
 							variant="outlined"
 							margin="normal"
@@ -65,6 +80,7 @@ export default function Transfer({currAccNum}) {
 							id="email"
 							label="Account Number"
 							name="account-number"
+							onChange={e=>handleToAccNumInput(e)}
 							autoComplete="account-number"
 							autoFocus
 						/>
@@ -77,6 +93,7 @@ export default function Transfer({currAccNum}) {
 							label="Amount"
 							type="amount"
 							id="amount"
+							onChange={e=>handleNominalInput(e)}
 							autoComplete="transfer-amount"
 						/>
 						<Button
