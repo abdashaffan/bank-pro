@@ -1,21 +1,54 @@
 stages:
+  - clone
+  - install_dependencies
   - test
   - deploy
 
-# lint and test are two different jobs in the same stage.
-# This allows us to run these two in parallel and making build faster
+cache:
+  paths:
+    - node_modules/
 
-lint:
+clone_repo:
+  stage: clone
+  script:
+    - echo pwd
+    - git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
+
+install_dependencies:
+  stage: install_dependencies
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths:
+      - node_modules/
+  script:
+    - echo pwd
+    - npm ci
+  only:
+    changes:
+      - package-lock.json
+
+lint_check:
   stage: test
   script:
     - npm run lint
+  except:
+    - dev
+    - master
 
-test:
+react_test:
   stage: test
   script:
     - npm run test
+  except:
+    - dev
+    - master
 
-deploy:dev:
+build_prod:
   stage: deploy
   script:
-    - bash deploy/deploy.sh
+    - npm run build
+  after_script:
+    - serve -s build
+  only:
+    - dev
+    - master
