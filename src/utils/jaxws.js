@@ -55,7 +55,7 @@ export async function doTransfer(fromAcc, toAcc, nom){
     const xmlDoc = parser.parseFromString(res.data,"text/xml");
     const result = xmlDoc.getElementsByTagName("return")[0].innerHTML;
     return result;
-  } catch {e}{
+  } catch (e){
     console.log(e.stack);
     return "Error , probably 500 or 400 idk. Check in console";
   }

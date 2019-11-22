@@ -55,9 +55,9 @@ export default function Transfer({currAccNum}) {
 		setNominal(e.target.value);
 	}
 
-	function handleSubmit(e){
+	async function handleSubmit(e){
 		e.preventDefault();
-		const transferResult = doTransfer(currAccNum,toAccount,nominal);
+		const transferResult = await doTransfer(currAccNum,toAccount,nominal);
 		console.log(transferResult);
 	}
 
