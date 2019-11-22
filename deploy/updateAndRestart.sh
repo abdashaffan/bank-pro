@@ -31,7 +31,7 @@ git checkout dev
 
 #install npm packages
 echo "Running npm ci"
-npm ci
+npm run build
 
 #Restart the node server
-npm start
+# npm start
