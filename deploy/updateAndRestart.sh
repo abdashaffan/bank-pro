@@ -27,6 +27,7 @@ npm install pm2 -g
 pm2 status
 
 cd /home/ubuntu/bank-pro
+git checkout dev
 
 #install npm packages
 echo "Running npm install"
