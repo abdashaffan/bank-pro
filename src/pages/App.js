@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 // Module for consuming SOAP webservice
 import { checkLoginCredentials } from "../utils/jaxws";
+// import { getUserTransaction } from "../../utils/jaxws";
 
 // React MUI component for styling
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -43,7 +44,9 @@ function ShowedPage({ page, handleLogin, isLoading, isValidLogin, currAccNum }) 
         />
       );
     case page === TRANSACTION:
-      return <TransactionPage />;
+      return <TransactionPage 
+      currAccNum={currAccNum}
+      />;
     case page === TRANSFER:
       return <TransferPage 
         currAccNum={currAccNum}
@@ -90,6 +93,7 @@ export default function App() {
   function isHomePage() {
     return page !== LOGIN;
   }
+
 
   return (
     <>
