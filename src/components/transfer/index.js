@@ -41,8 +41,10 @@ const theme = createMuiTheme({
 	}
 });
 
-export default function Transfer() {
+export default function Transfer({currAccNum}) {
 	const classes = useStyles();
+	const [toAccount,setToAccount] = React.useState();
+	const [nominal, setNominal] = React.useState();
 
 	return (
 		<Container component="main" maxWidth="xs">
