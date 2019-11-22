@@ -1,4 +1,5 @@
 stages:
+  - clean_apache_root
   - clone
   - install_dependencies
   - test
@@ -8,10 +9,15 @@ cache:
   paths:
     - node_modules/
 
+remove_last_repo:
+  stage: clean_apache_root
+  script: sudo rm /var/www/html/bankpro -r
+  allow_failure: true
+
 clone_repo:
   stage: clone
   script:
-    - echo pwd
+    - pwd
     - git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
 
 install_dependencies:
@@ -21,7 +27,7 @@ install_dependencies:
     paths:
       - node_modules/
   script:
-    - echo pwd
+    - pwd
     - npm ci
   only:
     changes:
