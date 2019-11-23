@@ -132,9 +132,10 @@ export async function getUserDataName(accNum) {
     const res = await Axios.post(wsdlURI, xmlContent, config);
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(res.data, "text/xml");
-    const dataName = xmlDoc.getElementsByTagName("name")[0].innerHTML;
-
-    return(dataName);
+    if (xmlDoc.getElementsByTagName("name")[0] != null) {
+      const dataName = xmlDoc.getElementsByTagName("name")[0].innerHTML;
+      return(dataName);
+    }
 
   } catch (e) {
     console.log(e);
@@ -161,9 +162,11 @@ export async function getUserDataBalance(accNum) {
     const res = await Axios.post(wsdlURI, xmlContent, config);
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(res.data, "text/xml");
-    const dataBalance = xmlDoc.getElementsByTagName("balance")[0].innerHTML;
+    if (xmlDoc.getElementsByTagName("balance")[0] != null) {
+      const dataBalance = xmlDoc.getElementsByTagName("balance")[0].innerHTML;
 
-    return(dataBalance);
+      return(dataBalance);
+    }
 
   } catch (e) {
     console.log(e);
@@ -191,9 +194,11 @@ export async function getUserDataAccNum(accNum) {
     const res = await Axios.post(wsdlURI, xmlContent, config);
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(res.data, "text/xml");
-    const dataAccNum = xmlDoc.getElementsByTagName("accountNumber")[0].innerHTML;
+    if (xmlDoc.getElementsByTagName("accountNumber")[0] != null) {
+      const dataAccNum = xmlDoc.getElementsByTagName("accountNumber")[0].innerHTML;
 
-    return(dataAccNum);
+      return(dataAccNum);
+    }
 
   } catch (e) {
     console.log(e);
