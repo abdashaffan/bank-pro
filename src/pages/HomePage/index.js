@@ -1,4 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
+import { getUserDataName } from "../../utils/jaxws";
+import { getUserDataBalance } from "../../utils/jaxws";
+import { getUserDataAccNum } from "../../utils/jaxws";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -13,8 +17,25 @@ import LocalAtmRoundedIcon from "@material-ui/icons/LocalAtmRounded";
 // Custom styles
 import applyCustomStyles from "./style";
 
-export default function HomePage() {
+export default function HomePage({currAccNum}) {
+  const [UserDataName, setUserDataName] = useState([]);
+  const [UserDataBalance, setUserDataBalance] = useState([]);
+  const [UserDataAccNum, setUserDataAccNum] = useState([]);
   const classes = applyCustomStyles();
+
+  var dataUserName = [];
+  var dataUserBalance = [];
+  var dataUserAccNum = [];
+  async function handleDataHome(currAccNum) {
+    dataUserName = await getUserDataName(currAccNum);
+    setUserDataName(dataUserName);
+    dataUserBalance = await getUserDataBalance(currAccNum);
+    setUserDataBalance(dataUserBalance);
+    dataUserAccNum = await getUserDataAccNum(currAccNum);
+    setUserDataAccNum(dataUserAccNum);
+  }
+
+  handleDataHome(currAccNum);
 
   return (
     <>
@@ -28,7 +49,7 @@ export default function HomePage() {
           Your BankPro Account
         </Typography>
       </Grid>
-      <Grid item xs={12} className={classes.card}>
+        <Grid item xs={12} className={classes.card}>
         <List className={classes.root}>
           <ListItem>
             <ListItemAvatar>
@@ -36,7 +57,9 @@ export default function HomePage() {
                 <AccountCircleIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Name" secondary="Abda Shaffan" />
+            {/* {UserData.map(row => ( */}
+              <ListItemText primary="Name" secondary={UserDataName} />
+            {/* ))}; */}
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -44,7 +67,9 @@ export default function HomePage() {
                 <AccountBalanceWalletRoundedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Account Number" secondary="10003" />
+            {/* {UserData.map(row => ( */}
+              <ListItemText primary="Account Number" secondary={UserDataAccNum} />
+            {/* // ))}; */}
           </ListItem>
           <ListItem>
             <ListItemAvatar>
@@ -52,7 +77,9 @@ export default function HomePage() {
                 <LocalAtmRoundedIcon />
               </Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Balance" secondary="100000" />
+            {/* {UserData.map(row => ( */}
+              <ListItemText primary="Balance" secondary={UserDataBalance} />
+            {/* ))}; */}
           </ListItem>
         </List>
       </Grid>

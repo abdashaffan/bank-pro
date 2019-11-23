@@ -52,7 +52,9 @@ function ShowedPage({ page, handleLogin, isLoading, isValidLogin, currAccNum }) 
         currAccNum={currAccNum}
       />;
     case page === HOME:
-      return <HomePage />;
+      return <HomePage 
+      currAccNum={currAccNum}
+      />;
     default:
       return (
         <LoginPage

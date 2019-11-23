@@ -61,10 +61,10 @@ export default  function TransactionTable({currAccNum}) {
 	const classes = useStyles();
 
 	var rows = [];
-	async function handleDataTransaksi(currAccNum){
+	async function handleDataTransaksi(currAccNum) {
 		// e.preventDefault();
 		rows = await getUserTransaction(currAccNum);
-		console.log("rows yg diterima = ", rows);
+		// console.log("rows yg diterima = ", rows);
 		setData(rows);
 	} 
 	// console.log(currAccNum);
