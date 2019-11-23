@@ -1,5 +1,6 @@
 {
   "name": "bank-pro",
+  "homepage": "/bankpro/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

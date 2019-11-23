@@ -40,17 +40,12 @@ lint_check:
   stage: test
   script:
     - npm run lint
-  except:
-    - dev
-    - master
+  allow_failure: true
 
 react_test:
   stage: test
   script:
     - npm run test
-  except:
-    - dev
-    - master
 
 build_prod:
   stage: deploy
