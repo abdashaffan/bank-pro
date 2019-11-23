@@ -66,12 +66,6 @@ function createData(id, time, type, amount, account) {
 	return { id, time, type, amount, account };
 }
 
-// const rows = [
-// 	createData("1", "1.30", "debit", "-100000", "r-12345678"),
-// 	createData("2", "1.45", "kredit", "+100000", "r-12345678"),
-// 	createData("3", "5.30", "debit", "-100000", "r-12345678")
-// ];
-
 
 export async function getUserTransaction(accNum) {
   const config = {
@@ -103,14 +97,14 @@ export async function getUserTransaction(accNum) {
     var arr = [];
     
     for (var i=0; i<dataTransaksi.length; i++) {
-      if (dataType[i].innerHTML == "kredit") {
+      if (dataType[i].innerHTML === "kredit") {
         arr.push(createData(i+1, dataDate[i].innerHTML, dataType[i].innerHTML, dataAmount[i].innerHTML, dataAccNum1[i].innerHTML));
       } else {
         arr.push(createData(i+1, dataDate[i].innerHTML, dataType[i].innerHTML, dataAmount[i].innerHTML, dataAccNum2[i].innerHTML));
       }
     }
     
-    console.log(arr);
+    // console.log(arr);
     return(arr);
 
   } catch (e) {
@@ -118,40 +112,95 @@ export async function getUserTransaction(accNum) {
   }
 }
 
+export async function getUserDataName(accNum) {
+  const config = {
+    headers: {
+      "Content-Type": "text/xml"
+    }
+  };
+  const xmlContent = `
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:k03="http://K03G04Tubes2.org/">
+      <soapenv:Header/>
+      <soapenv:Body>
+        <k03:getNasabah>
+          <account_num>${accNum}</account_num>
+      </k03:getNasabah>
+    </soapenv:Body>
+  </soapenv:Envelope>
+  `;
+  try {
+    const res = await Axios.post(wsdlURI, xmlContent, config);
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(res.data, "text/xml");
+    if (xmlDoc.getElementsByTagName("name")[0] != null) {
+      const dataName = xmlDoc.getElementsByTagName("name")[0].innerHTML;
+      return(dataName);
+    }
 
-// export async function getUserData(accNum) {
-//   const config = {
-//     headers: {
-//       "Content-Type": "text/xml"
-//     }
-//   };
-//   const xmlContent = `
-//     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:k03="http://K03G04Tubes2.org/">
-//       <soapenv:Header/>
-//       <soapenv:Body>
-//         <k03:getNasabah>
-//           <account_num>${accNum}</account_num>
-//       </k03:getNasabah>
-//     </soapenv:Body>
-//   </soapenv:Envelope>
-//   `;
-//   try {
-//     const res = await Axios.post(wsdlURI, xmlContent, config);
-//     const parser = new DOMParser();
-//     const xmlDoc = parser.parseFromString(res.data, "text/xml");
-//     const dataDate = xmlDoc.getElementsByTagName("date");
-//     const dataType = xmlDoc.getElementsByTagName("transactionType");
-    
-//     var arr = [];
-//     arr.push(i+1, dataDate[i].innerHTML, dataType[i].innerHTML, dataAmount[i].innerHTML, dataAccNum[i].innerHTML);
-    
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-//     console.log(arr[0])
+export async function getUserDataBalance(accNum) {
+  const config = {
+    headers: {
+      "Content-Type": "text/xml"
+    }
+  };
+  const xmlContent = `
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:k03="http://K03G04Tubes2.org/">
+      <soapenv:Header/>
+      <soapenv:Body>
+        <k03:getNasabah>
+          <account_num>${accNum}</account_num>
+      </k03:getNasabah>
+    </soapenv:Body>
+  </soapenv:Envelope>
+  `;
+  try {
+    const res = await Axios.post(wsdlURI, xmlContent, config);
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(res.data, "text/xml");
+    if (xmlDoc.getElementsByTagName("balance")[0] != null) {
+      const dataBalance = xmlDoc.getElementsByTagName("balance")[0].innerHTML;
 
-    
-//     console.log(arr);
+      return(dataBalance);
+    }
 
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+
+export async function getUserDataAccNum(accNum) {
+  const config = {
+    headers: {
+      "Content-Type": "text/xml"
+    }
+  };
+  const xmlContent = `
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:k03="http://K03G04Tubes2.org/">
+      <soapenv:Header/>
+      <soapenv:Body>
+        <k03:getNasabah>
+          <account_num>${accNum}</account_num>
+      </k03:getNasabah>
+    </soapenv:Body>
+  </soapenv:Envelope>
+  `;
+  try {
+    const res = await Axios.post(wsdlURI, xmlContent, config);
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(res.data, "text/xml");
+    if (xmlDoc.getElementsByTagName("accountNumber")[0] != null) {
+      const dataAccNum = xmlDoc.getElementsByTagName("accountNumber")[0].innerHTML;
+
+      return(dataAccNum);
+    }
+
+  } catch (e) {
+    console.log(e);
+  }
+}
