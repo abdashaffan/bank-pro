@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { getUserDataName } from "../../utils/jaxws";
 import { getUserDataBalance } from "../../utils/jaxws";
 import { getUserDataAccNum } from "../../utils/jaxws";
@@ -23,19 +23,25 @@ export default function HomePage({currAccNum}) {
   const [UserDataAccNum, setUserDataAccNum] = useState([]);
   const classes = applyCustomStyles();
 
-  var dataUserName = [];
-  var dataUserBalance = [];
-  var dataUserAccNum = [];
-  async function handleDataHome(currAccNum) {
-    dataUserName = await getUserDataName(currAccNum);
-    setUserDataName(dataUserName);
-    dataUserBalance = await getUserDataBalance(currAccNum);
-    setUserDataBalance(dataUserBalance);
-    dataUserAccNum = await getUserDataAccNum(currAccNum);
-    setUserDataAccNum(dataUserAccNum);
-  }
+  useEffect(() => {
 
-  handleDataHome(currAccNum);
+      async function handleDataHome(currAccNum) {
+        const response = await Promise.all([
+          getUserDataName(currAccNum),
+          getUserDataBalance(currAccNum),
+          getUserDataAccNum(currAccNum)
+        ]);
+        setUserDataName(response[0]);
+        setUserDataBalance(response[1]);
+        setUserDataAccNum(response[2]);
+
+      }
+      handleDataHome(currAccNum);
+
+  }, [currAccNum]);
+
+
+
 
   return (
     <>
