@@ -1,0 +1,60 @@
+stages:
+  - clean_apache_root
+  - clone
+  - install_dependencies
+  - test
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+remove_last_repo:
+  stage: clean_apache_root
+  script: sudo rm /var/www/html/bankpro -r
+  allow_failure: true
+  only:
+    - dev
+    - master
+
+clone_repo:
+  stage: clone
+  script:
+    - pwd
+    - git clone git@gitlab.informatika.org:if3110-2019-02-k03-04/bank-pro.git
+
+install_dependencies:
+  stage: install_dependencies
+  cache:
+    key: $CI_COMMIT_REF_SLUG-$CI_PROJECT_DIR
+    paths:
+      - node_modules/
+  script:
+    - pwd
+    - npm ci
+  only:
+    changes:
+      - package-lock.json
+
+lint_check:
+  stage: test
+  script:
+    - npm run lint
+  allow_failure: true
+
+react_test:
+  stage: test
+  script:
+    - npm run test
+
+build_prod:
+  stage: deploy
+  script:
+    - npm run build
+  after_script:
+    - pwd
+    - sudo mv build bankpro
+    - sudo cp -r bankpro /var/www/html
+  only:
+    - dev
+    - master
