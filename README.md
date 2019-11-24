@@ -19,4 +19,8 @@ Apikasi web bank-pro dikembangakan menggunakan ReactJS. Aplikasi web bank-pro me
 
 
 
-
+### Untuk tugas DPPL IF3159
+1. Continous Integration :
+    a. Linting : 
+2. Eksplorasi EC2 : 
+3. Deployment bank-pro ke EC2:  
