@@ -52,3 +52,4 @@ Apikasi web bank-pro dikembangakan menggunakan ReactJS. Aplikasi web bank-pro me
 2. Eksplorasi EC2 : 13517021
 3. Deployment BankPro ke EC2: 13517021
 5. Continuous Deployment Pipeline: 13517021
+6. URL deployment : ec2-52-204-222-118.compute-1.amazonaws.com/bankpro
