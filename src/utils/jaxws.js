@@ -1,8 +1,9 @@
 import Axios from "axios";
 //URI Gak perlu pake http://localhost:8080 soalnya udah di set di src/setupProxy biar gak kena CORS error
-const wsdlURI = "/services/bankpro";
+const wsdlURI = "http://52.90.76.43:8080/ws-bank-1.0/services/bankpro";
 
 export async function checkLoginCredentials(accNum) {
+  // console.log('checkLogin');
   // TODO: ganti hardcoded url (localhost) pas udah di deploy
   const config = {
     headers: {
@@ -31,6 +32,7 @@ export async function checkLoginCredentials(accNum) {
 }
 
 export async function doTransfer(fromAcc, toAcc, nom){
+  // console.log('doTrf');
   const config={
     headers:{
       "Content-Type": "text/xml"
@@ -68,6 +70,7 @@ function createData(id, time, type, amount, account) {
 
 
 export async function getUserTransaction(accNum) {
+  // console.log('getUserTrans');
   const config = {
     headers: {
       "Content-Type": "text/xml"
@@ -113,6 +116,7 @@ export async function getUserTransaction(accNum) {
 }
 
 export async function getUserDataName(accNum) {
+  // console.log('getUserDataName');
   const config = {
     headers: {
       "Content-Type": "text/xml"
@@ -143,6 +147,7 @@ export async function getUserDataName(accNum) {
 }
 
 export async function getUserDataBalance(accNum) {
+  // console.log('getUserdataBalance');
   const config = {
     headers: {
       "Content-Type": "text/xml"

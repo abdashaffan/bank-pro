@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { getUserTransaction } from "../../utils/jaxws";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -32,15 +32,6 @@ const StyledTableRow = withStyles(theme => ({
 	}
 }))(TableRow);
 
-// function createData(id, time, type, amount, account) {
-// 	return { id, time, type, amount, account };
-// }
-
-// const rows = [
-// 	createData("1", "1.30", "debit", "-100000", "r-12345678"),
-// 	createData("2", "1.45", "kredit", "+100000", "r-12345678"),
-// 	createData("3", "5.30", "debit", "-100000", "r-12345678")
-// ];
 
 const useStyles = makeStyles(theme => ({
 	root: {
@@ -60,17 +51,16 @@ export default  function TransactionTable({currAccNum}) {
 	const [Data, setData] = useState([]);
 	const classes = useStyles();
 
-	var rows = [];
-	async function handleDataTransaksi(currAccNum) {
-		// e.preventDefault();
-		rows = await getUserTransaction(currAccNum);
-		// console.log("rows yg diterima = ", rows);
-		setData(rows);
-	} 
-	// console.log(currAccNum);
-	// var 
-	// console.log(parseInt(currAccNum.currAccNum));
-	handleDataTransaksi(currAccNum);
+	
+	useEffect(() => {
+		var rows = [];
+		async function handleDataTransaksi(currAccNum) {
+			rows = await getUserTransaction(currAccNum);
+			setData(rows);
+		}
+		handleDataTransaksi(currAccNum);
+	}, [currAccNum]);
+
 
 	return (
 		<Container component="main" maxWidth="md">
